@@ -1,3 +1,6 @@
 {
-  "token": ""
+  "token": "",
+  "internal": {
+    "port": 1223
+  }
 }
