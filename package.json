@@ -4,5 +4,9 @@
   "main": "index.js",
   "repository": "https://github.com/pikokr/UniqueBots-Bot.git",
   "author": "pikokr <parangee9706@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "redis": "^3.0.2"
+  }
 }
