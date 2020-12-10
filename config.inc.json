@@ -2,5 +2,13 @@
   "token": "",
   "internal": {
     "port": 1223
+  },
+  "guild": "",
+  "role": {
+    "approved": "",
+    "pending": ""
+  },
+  "emojis": {
+    "pending": ""
   }
 }
