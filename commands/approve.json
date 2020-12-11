@@ -1,0 +1,12 @@
+{
+  "name": "approve",
+  "description": "봇 승인",
+  "options": [
+    {
+      "name": "bot",
+      "description": "심사 승인할 봇",
+      "type": 6,
+      "required": true
+    }
+  ]
+}
