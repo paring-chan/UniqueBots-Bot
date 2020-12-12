@@ -1,23 +1,33 @@
 const Discord = require('discord.js')
 const config = require('../config.json')
-const express = require('express')
 
 process.on('uncaughtException', console.error)
 process.on('unhandledRejection', console.error)
 
+const io = require('socket.io')(config.internal.port)
 
-const app = express()
+io.use((socket, next) => {
+    if (socket.request.connection._peername.address !== '::ffff:127.0.0.1') return socket.disconnect(true)
+    next()
+})
 
-app.use(express.json())
-
-app.post('/evaluate', (req, res) => {
-    if (!req.body || !req.body.code) return res.end()
-    new Promise(resolve => resolve(eval(req.body.code))).then(result => {
-        console.log(result)
-        res.json({result})
-    }).catch(err => {
-        console.log(err)
-        res.json({err})
+io.sockets.on('connection', socket => {
+    console.log(socket.id)
+    socket.on('eval', async data => {
+        console.log(data)
+        new Promise(resolve => resolve(eval(data.code))).then(result => {
+            console.log(result)
+            socket.emit('eval', {
+                id: data.id,
+                result: result
+            })
+        }).catch(err => {
+            console.log(err)
+            socket.emit('eval', {
+                id: data.id,
+                result: err
+            })
+        })
     })
 })
 
@@ -39,4 +49,4 @@ client.on('ready', () => {
 })
 
 
-client.login(config.token).then(() => app.listen(config.internal.port, '127.0.0.1'))
+client.login(config.token)

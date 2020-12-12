@@ -11,5 +11,6 @@
   "emojis": {
     "pending": ""
   },
-  "application": ""
+  "application": "",
+  "secret": ""
 }
